@@ -200,11 +200,10 @@ def train(args, train_dataset, model, tokenizer):
     model.zero_grad()
  
     for idx in range(args.start_epoch, int(args.num_train_epochs)): 
-        # bar = tqdm(train_dataloader,total=len(train_dataloader))
+        bar = tqdm(train_dataloader,total=len(train_dataloader))
         tr_num=0
         train_loss=0
-        # for step, batch in enumerate(bar):
-        for step, batch in enumerate(train_dataloader):
+        for step, batch in enumerate(bar):
             inputs = batch[0].to(args.device)
             labels=batch[1].to(args.device) 
             model.train()
@@ -231,7 +230,7 @@ def train(args, train_dataset, model, tokenizer):
                 avg_loss=tr_loss
             avg_loss=round(train_loss/tr_num,5)
 
-            # bar.set_description("epoch {} loss {}".format(idx, avg_loss))
+            bar.set_description("epoch {} loss {}".format(idx, avg_loss))
             # logger.info("epoch {} loss {}".format(idx, avg_loss))
 
                 
